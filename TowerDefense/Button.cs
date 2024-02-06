@@ -29,12 +29,11 @@ namespace TowerDefense
 
         public void Update()
         {
-            MouseState mouse = Mouse.GetState();
             
-            if (buttonRect.Contains(mouse.Position))
+            if (buttonRect.Contains(MouseInputManager.MousePosition))
             {
                 buttonColor = Color.White;
-                if (mouse.LeftButton == ButtonState.Pressed) //registers that the button has been pressed down
+                if (MouseInputManager.HasClicked) //registers that the button has been pressed down
                 {
                     IsSelected = true;
                 }

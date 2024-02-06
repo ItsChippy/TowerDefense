@@ -8,9 +8,7 @@ namespace TowerDefense
     internal enum GameState
     {
         StartMenu,
-        Settings,
         Playing,
-        Paused,
         GameOver
     }
 
@@ -48,11 +46,13 @@ namespace TowerDefense
             Globals.SpriteBatch = spriteBatch;
             Globals.Content = Content;
             Globals.GameWindow = Window;
-            CurrentState = GameState.StartMenu;
+            Globals.GraphicsDevice = GraphicsDevice;
+            CurrentState = GameState.Playing;
 
             stateHandler = new Dictionary<GameState, IStateHandler>
             {
-                { GameState.StartMenu, new IStateStartMenu() }
+                { GameState.StartMenu, new IStateStartMenu() },
+                { GameState.Playing, new IStatePlaying() }
             };
         }
 
@@ -61,6 +61,8 @@ namespace TowerDefense
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             Globals.Update(gameTime);
+            MouseInputManager.Update();
+            ParticleSystem.Update();
 
             stateHandler[CurrentState].Update();
 

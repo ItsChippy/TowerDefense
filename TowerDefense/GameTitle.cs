@@ -18,7 +18,7 @@ namespace TowerDefense
         {
             font = Globals.Content.Load<SpriteFont>("menufont");
 
-            titleString = "SPACE DEFENSE";
+            titleString = "SPACE DEFENCE";
             titleTextPos = new Vector2(400, 100);
             textMiddlePoint = font.MeasureString(titleString) / 2;
         }

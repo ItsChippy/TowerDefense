@@ -23,7 +23,12 @@ namespace TowerDefense
 
         public override void Draw()
         {
+            Globals.SpriteBatch.Begin();
+            
             startMenuScreen.Draw();
+            
+            Globals.SpriteBatch.End();
+
         }
     }
 }

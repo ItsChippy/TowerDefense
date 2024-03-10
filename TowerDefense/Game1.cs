@@ -17,6 +17,7 @@ namespace TowerDefense
         public static Game1 Self;
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        public static RenderTarget2D RenderTarget;
 
         public static GameState CurrentState;
         private Dictionary<GameState, IStateHandler> stateHandler;
@@ -47,6 +48,7 @@ namespace TowerDefense
             Globals.Content = Content;
             Globals.GameWindow = Window;
             Globals.GraphicsDevice = GraphicsDevice;
+            RenderTarget = new RenderTarget2D(GraphicsDevice, Window.ClientBounds.Width, Window.ClientBounds.Height);
             CurrentState = GameState.Playing;
 
             stateHandler = new Dictionary<GameState, IStateHandler>
@@ -73,11 +75,7 @@ namespace TowerDefense
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
-            spriteBatch.Begin();
-
             stateHandler[CurrentState].Draw();
-
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }

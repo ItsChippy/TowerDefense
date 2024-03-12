@@ -53,7 +53,9 @@ namespace TowerDefense
             CurrentState = GameState.StartMenu;
             MediaPlayer.Play(mainTheme);
             MediaPlayer.Volume = 0.3f;
-            stateHandler = new Dictionary<GameState, IStateHandler>
+
+            //Dictionary that handles the gamestates, using polymorphism for the different classes that are representing the gamestates.
+            stateHandler = new Dictionary<GameState, IStateHandler> 
             {
                 { GameState.StartMenu, new IStateStartMenu() },
                 { GameState.Playing, new IStatePlaying() },

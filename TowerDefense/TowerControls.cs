@@ -71,6 +71,7 @@ namespace TowerDefense
             Controls.Add(slowTowerButton);
         }
 
+        //OnClick events for various buttons in the game, using MonoGame.UI.Forms
         private void OnClickUnMuteButton(object sender, EventArgs e)
         {
             var unMuteButton = sender as Button;

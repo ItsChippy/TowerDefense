@@ -26,6 +26,7 @@ namespace TowerDefense
 
         public override void Update(BaseEnemy[]enemies)
         {
+            //checks collision and removes bullets that have it
             for (int i = 0; i < shotProjectiles.Count; i++)
             {
                 if (shotProjectiles[i] != null)
@@ -37,22 +38,26 @@ namespace TowerDefense
                 }
             }
 
+            //updates all shots
             foreach(var shot in shotProjectiles)
             {
                 shot.Update();
             }
 
+            //if no enemies are present, target becomes null
             if (enemies == null || enemies.Length == 0)
             {
                 target = null;
                 return;
             }
 
+            //Looks for a new target if there is no current target or the target went out of range
             if (target == null || Vector2.Distance(position, target.position) > range)
             {
                 target = GetClosestEnemy(enemies);
             }
 
+            //rotates towards its current target
             if (target != null)
             {
                 Vector2 calcVector = position - target.position;
@@ -61,6 +66,7 @@ namespace TowerDefense
             }
         }
 
+        //handles the shooting
         private void ShootProjectile()
         {
             attackSpeed -= Globals.DeltaTimeSeconds;

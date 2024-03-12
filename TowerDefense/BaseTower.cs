@@ -55,6 +55,12 @@ namespace TowerDefense
             return true;
         }
 
+
+        /// <summary>
+        /// Finds the closest enemy using directions and distance formula
+        /// </summary>
+        /// <param name="enemies"></param>
+        /// <returns>the closest enemy in range and in the given array</returns>
         protected BaseEnemy GetClosestEnemy(BaseEnemy[] enemies)
         {
             BaseEnemy closestEnemy = null;

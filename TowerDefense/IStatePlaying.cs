@@ -60,7 +60,7 @@ namespace TowerDefense
                     }
                     break;
                 case PlayState.NextTurn:
-                    enemyGenerator.WaitForNextRound(PlayState.Round1);
+                    enemyGenerator.WaitForNextRound(PlayState.Round1); //first when entering game, transitions to round 1
                     break;
             }
             ParticleSystem.Update();

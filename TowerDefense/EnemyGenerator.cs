@@ -33,6 +33,7 @@ namespace TowerDefense
             SetEnemyWave2();
         }
 
+        //Checks if all the enemies in the current round are dead
         public bool CheckIfRoundIsOver(BaseEnemy[]enemyWave)
         {
             for (int i = 0; i < enemyWave.Length; i++)
@@ -45,6 +46,7 @@ namespace TowerDefense
             return true;
         }
 
+        //Transitions to the next round when player has pressed Enter
         public void WaitForNextRound(PlayState state)
         {
             KeyboardState keys = Keyboard.GetState();
@@ -64,6 +66,7 @@ namespace TowerDefense
             }
         }
 
+        //Initializes Round 2
         private void SetEnemyWave2()
         {
             for (int i = 0;  i < enemyWave2.Length; i++)
@@ -101,6 +104,7 @@ namespace TowerDefense
             }
         }
 
+        //Initializes Round 1
         private void SetEnemyWave1()
         {
             for (int i = 0; i < enemyWave1.Length; i++)

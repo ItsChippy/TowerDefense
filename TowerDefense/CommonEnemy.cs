@@ -33,7 +33,7 @@ namespace TowerDefense
 
         public override void Update(SimplePath path)
         {
-            if (health <= 0)
+            if (health <= 0) //if enemy is dead
             {
                 CreateParticleExplosion();
                 ParticleSystem.AddParticleEmitter(explosion);
@@ -41,12 +41,14 @@ namespace TowerDefense
                 position = new Vector2(1000, 1000);
                 isDead = true;
             }
-            if (CheckForOutOfBounds() && !dealtDamage)
+            if (CheckForOutOfBounds() && !dealtDamage) //has reached the end of the path
             {
                 Resources.healthUpdate(damage);
                 position = new Vector2(1000, 1000);
                 dealtDamage = true;
             }
+
+            //Gets the next node in the path, calculates the direction and rotates accordingly
             int currentPointIndex = FindNearestPathIndex(path);
             Vector2 nextPoint = path.GetPos(Math.Min(currentPointIndex + 1, path.AntalPunkter - 1));
             Vector2 direction = Vector2.Normalize(nextPoint - position);

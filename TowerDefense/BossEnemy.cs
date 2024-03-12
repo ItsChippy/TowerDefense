@@ -10,7 +10,7 @@ namespace TowerDefense
     internal class BossEnemy : BaseEnemy
     {
         bool dealtDamage;
-        EnemyHealthBar ehb;
+        EnemyHealthBar ehb; //display for their current health out of their max health
         SoundEffect spawnSound;
         bool playedSound;
         public BossEnemy(Vector2 position)
@@ -34,23 +34,27 @@ namespace TowerDefense
             var instance = spawnSound.CreateInstance();
             if(!playedSound)
             {
+                //ensures the spawnsound is only played once
                 instance.Volume = 1f;
                 instance.Play();
                 playedSound = true;
             }
-            if(health < 0)
+
+            if(health < 0) //if it dies
             {
                 instance.Play();
                 Resources.AddGold(2000);
                 position = new Vector2(1000, 1000);
                 isDead = true;
             }
-            if (CheckForOutOfBounds() && !dealtDamage)
+            if (CheckForOutOfBounds() && !dealtDamage) //if it reaches the end
             {
                 Resources.healthUpdate(damage);
                 position = new Vector2(1000, 1000);
                 dealtDamage = true;
             }
+
+            //finds the next point in it's path, calculates the direction and rotates accordingly
             int currentPointIndex = FindNearestPathIndex(path);
             Vector2 nextPoint = path.GetPos(Math.Min(currentPointIndex + 1, path.AntalPunkter - 1));
             Vector2 direction = Vector2.Normalize(nextPoint - position);

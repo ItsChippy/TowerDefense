@@ -24,6 +24,7 @@ namespace TowerDefense
 
         public override void Update(BaseEnemy[] enemies)
         {
+            //Collision for the shots/projectiles
             for (int i = 0; i < shotProjectiles.Count; i++)
             {
                 if (shotProjectiles[i] != null)
@@ -40,17 +41,20 @@ namespace TowerDefense
                 shot.Update();
             }
 
+            //if no enemies are present on the path
             if (enemies == null || enemies.Length == 0)
             {
                 target = null;
                 return;
             }
 
+            //if target is out of range or dead
             if (target == null || Vector2.Distance(position, target.position) > range)
             {
                 target = GetClosestEnemy(enemies);
             }
 
+            //Rotates after the target and fires
             if (target != null)
             {
                 Vector2 calcVector = position - target.position;

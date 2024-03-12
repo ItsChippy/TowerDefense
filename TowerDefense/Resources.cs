@@ -26,16 +26,28 @@ namespace TowerDefense
             healthUpdate = TakeDamageDelegate;
         }
 
+        /// <summary>
+        /// removes health from the player resource pool
+        /// </summary>
+        /// <param name="damage"></param>
         private static void TakeDamageDelegate(int damage)
         {
             health -= damage;
         }
 
+        /// <summary>
+        /// removes gold from the player resource pool
+        /// </summary>
+        /// <param name="cost"></param>
         public static void RemoveGold(int cost)
         {
             gold -= cost;
         }
 
+        /// <summary>
+        /// Adds gold to the player resource pool
+        /// </summary>
+        /// <param name="cost"></param>
         public static void AddGold(int cost)
         {
             gold += cost;

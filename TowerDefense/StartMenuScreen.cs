@@ -46,7 +46,7 @@ namespace TowerDefense
             };
 
             ParticleEmitter pe = new(mouseEmitter, mousePed);
-            ParticleSystem.AddParticleEmitter(pe);
+            ParticleSystem.AddParticleEmitter(pe); //Created a particle trail at the mouse position
         }
 
         public void Update()

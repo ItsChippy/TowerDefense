@@ -24,8 +24,8 @@ namespace TowerDefense
 
         public void Update(int health, Vector2 position)
         {
-            currentHealth = health;
-            this.position = position;
+            currentHealth = health; //updates the left side of the health bar
+            this.position = position; //follows the enemy it's attached to
         }
 
         public void Draw()

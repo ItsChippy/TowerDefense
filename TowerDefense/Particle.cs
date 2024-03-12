@@ -54,7 +54,7 @@ namespace TowerDefense
 
         public void Draw()
         {
-            Globals.SpriteBatch.Draw(data.texture, pos, null, color * opacity, 0f, origin, Scale, SpriteEffects.None, 0f);
+            Globals.SpriteBatch.Draw(data.texture, pos, null, color * opacity, 0f, origin, Scale, SpriteEffects.None, 0.5f);
         }
     }
 }

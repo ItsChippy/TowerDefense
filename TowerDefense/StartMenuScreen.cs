@@ -12,7 +12,6 @@ namespace TowerDefense
 
         MenuButton playButton;
         MenuButton exitButton;
-        MenuButton settingsButton;
 
         GameTitle gameTitle;
         Texture2D menuBackground;
@@ -23,13 +22,10 @@ namespace TowerDefense
             gameTitle = new GameTitle();
 
             playButton = new MenuButton("playbutton");
-            playButton.ChangePosition(new Vector2(0, 250));
+            playButton.ChangePosition(new Vector2(0, 350));
 
             exitButton = new MenuButton("exitbutton");
             exitButton.ChangePosition(new Vector2(0, 450));
-
-            settingsButton = new MenuButton("settingsbutton");
-            settingsButton.ChangePosition(new Vector2(0, 350));
 
             menuBackground = Globals.Content.Load<Texture2D>("spacebackground");
 
@@ -57,7 +53,6 @@ namespace TowerDefense
         {
             Game1.Self.IsMouseVisible = false;
             playButton.Update();
-            settingsButton.Update();
             exitButton.Update();
             if (playButton.IsSelected) Game1.CurrentState = GameState.Playing;
             if (exitButton.IsSelected) Game1.Self.Exit();
@@ -68,7 +63,6 @@ namespace TowerDefense
             Globals.SpriteBatch.Draw(menuBackground, Vector2.Zero, Color.White);
             gameTitle.Draw();
             playButton.Draw();
-            settingsButton.Draw();
             exitButton.Draw();
             ParticleSystem.Draw();
         }

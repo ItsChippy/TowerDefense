@@ -15,12 +15,40 @@ namespace TowerDefense
 
         public override void InitializeComponent()
         {
+            var muteButton = new Button()
+            {
+                Text = "Mute Music",
+                TextColor = Color.Black,
+                Size = new Vector2(100, 50),
+                BackgroundColor = Color.LightBlue,
+                Location = new Vector2(0, 550)
+            };
+
+            muteButton.Clicked += OnClickMuteButton;
+
+            Controls.Add(muteButton);
+
+            var unMuteButton = new Button()
+            {
+                Text = "Unmute Music",
+                TextColor = Color.Black,
+                Size = new Vector2(100, 50),
+                BackgroundColor = Color.LightBlue,
+                Location = new Vector2(0, 495)
+            };
+
+            unMuteButton.Clicked += OnClickUnMuteButton;
+
+            Controls.Add(unMuteButton);
+
+
             var gunTowerButton = new Button()
             {
                 Text = "Gun Tower(50)",
                 TextColor = Color.Black,
                 Size = new Vector2(100, 50),
                 BackgroundColor = Color.LightGray,
+                IsVisible = true,
                 Location = new Vector2(700, 550), //bottom right of the screen
             };
 
@@ -34,6 +62,7 @@ namespace TowerDefense
                 TextColor = Color.Black,
                 Size = new Vector2(100, 50),
                 BackgroundColor = Color.LightGray,
+                IsVisible = true,
                 Location = new Vector2(580, 550),
             };
 
@@ -42,16 +71,34 @@ namespace TowerDefense
             Controls.Add(slowTowerButton);
         }
 
+        private void OnClickUnMuteButton(object sender, EventArgs e)
+        {
+            var unMuteButton = sender as Button;
+            MediaPlayer.IsMuted = false;
+        }
+
+        private void OnClickMuteButton(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            MediaPlayer.IsMuted = true;
+        }
+
         private void OnClickGunTowerButton(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            TowerPlacer.SelectGunTower();
+            if (Resources.GetGold() >= 50)
+            {
+                TowerPlacer.SelectGunTower();
+            }
         }
 
         private void OnClickSlowTowerButton(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            TowerPlacer.SelectSlowTower();
+            if (Resources.GetGold() >= 30)
+            {
+                TowerPlacer.SelectSlowTower();
+            }
         }
     }
 }

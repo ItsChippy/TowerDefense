@@ -1,6 +1,8 @@
 ﻿global using Microsoft.Xna.Framework;
 global using Microsoft.Xna.Framework.Content;
 global using Microsoft.Xna.Framework.Graphics;
+global using Microsoft.Xna.Framework.Audio;
+global using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;

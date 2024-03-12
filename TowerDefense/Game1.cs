@@ -19,7 +19,7 @@ namespace TowerDefense
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         public static RenderTarget2D RenderTarget;
-
+        public static Song mainTheme;
         public static GameState CurrentState;
         private Dictionary<GameState, IStateHandler> stateHandler;
 
@@ -32,6 +32,7 @@ namespace TowerDefense
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
+            mainTheme = Content.Load<Song>("maintheme");
         }
 
         protected override void Initialize()
@@ -45,17 +46,18 @@ namespace TowerDefense
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
             Globals.SpriteBatch = spriteBatch;
             Globals.Content = Content;
             Globals.GameWindow = Window;
             Globals.GraphicsDevice = GraphicsDevice;
-            CurrentState = GameState.Playing;
-
+            CurrentState = GameState.StartMenu;
+            MediaPlayer.Play(mainTheme);
+            MediaPlayer.Volume = 0.3f;
             stateHandler = new Dictionary<GameState, IStateHandler>
             {
                 { GameState.StartMenu, new IStateStartMenu() },
-                { GameState.Playing, new IStatePlaying() }
+                { GameState.Playing, new IStatePlaying() },
+                { GameState.GameOver, new IStateGameOver() }
             };
         }
 
@@ -63,6 +65,7 @@ namespace TowerDefense
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            MediaPlayer.IsRepeating = true;
             Globals.Update(gameTime);
             MouseInputManager.Update();
             ParticleSystem.Update();
@@ -77,6 +80,11 @@ namespace TowerDefense
             stateHandler[CurrentState].Draw();
 
             base.Draw(gameTime);
+        }
+
+        public void Restart()
+        {
+            LoadContent();
         }
     }
 }

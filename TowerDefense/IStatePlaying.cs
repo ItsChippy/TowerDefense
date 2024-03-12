@@ -17,7 +17,7 @@ namespace TowerDefense
     }
     internal class IStatePlaying : IStateHandler
     {
-        PlayState state;
+        public static PlayState state;
         Texture2D mapBackground;
         EnemyPath enemyPath;
         EnemyGenerator enemyGenerator;
@@ -26,41 +26,66 @@ namespace TowerDefense
 
         public IStatePlaying()
         {
-            //state = PlayState.NextTurn;
             mapBackground = Globals.Content.Load<Texture2D>("mapbackground");
             enemyPath = new EnemyPath();
             enemyGenerator = new EnemyGenerator(enemyPath.path);  
             resources = new Resources();
             placer = new TowerPlacer();
+            state = PlayState.NextTurn;
             DrawOnRenderTarget();
         }
 
         public override void Update()
         {
+            if (Resources.GetHealth() <= 0)
+            {
+                IStateGameOver.hasWon = false;
+                Game1.CurrentState = GameState.GameOver;
+            }
             switch (state)
             {
                 case PlayState.Round1:
                     enemyGenerator.UpdateWave1();
+                    if(enemyGenerator.CheckIfRoundIsOver(enemyGenerator.enemyWave1))
+                    {
+                        enemyGenerator.WaitForNextRound(PlayState.Round2);
+                    }
                     break;
                 case PlayState.Round2:
+                    enemyGenerator.UpdateWave2();
+                    if (enemyGenerator.CheckIfRoundIsOver(enemyGenerator.enemyWave2))
+                    {
+                        IStateGameOver.hasWon = true;
+                        Game1.CurrentState = GameState.GameOver;
+                    }
                     break;
                 case PlayState.NextTurn:
+                    enemyGenerator.WaitForNextRound(PlayState.Round1);
                     break;
             }
-           placer.Update();
-           Game1.Self.IsMouseVisible = true;
-           enemyGenerator.UpdateWave1();
+            ParticleSystem.Update();
+            placer.Update(enemyGenerator.enemyWave1);
+            placer.Update(enemyGenerator.enemyWave2);
         }
 
         public override void Draw()
         {
             DrawOnRenderTarget();
             Globals.SpriteBatch.Begin(SpriteSortMode.FrontToBack);
-            
+            switch(state)
+            {
+                case PlayState.Round1:
+                    enemyGenerator.DrawWave1();
+                    break;
+                case PlayState.Round2:
+                    enemyGenerator.DrawWave2();
+                    break;
+            }
+            enemyGenerator.DrawNextRoundText();
+            ParticleSystem.Draw();
             Globals.SpriteBatch.Draw(mapBackground, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             Globals.SpriteBatch.Draw(Game1.RenderTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
             placer.DrawSelectedTower();
-            enemyGenerator.DrawWave1();
             resources.Draw();
             
             Globals.SpriteBatch.End();

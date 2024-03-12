@@ -19,6 +19,12 @@ namespace TowerDefense
             newTower = null;
         }
 
+        public void Update(BaseEnemy[] enemies)
+        {
+            UpdateTowers(enemies);
+            UpdateTowerPlacer();
+        }
+
         public static void SelectGunTower()
         {
             selectingTower = true;
@@ -31,13 +37,21 @@ namespace TowerDefense
             newTower = new SlowTower(MouseInputManager.MousePosition);
         }
 
-        public void Update()
+        public void UpdateTowerPlacer()
         {
             if (selectingTower)
             {
                 RemoveSelectedTower();
                 MoveSelectedTower();
                 PlaceSelectedTower();
+            }
+        }
+
+        public void UpdateTowers(BaseEnemy[] enemies)
+        {
+            foreach(BaseTower tower in towers) 
+            {
+                tower.Update(enemies);
             }
         }
 
@@ -53,6 +67,14 @@ namespace TowerDefense
         {
             if (newTower != null && BaseTower.CanPlace(newTower) && MouseInputManager.HasClicked)
             {
+                if (newTower is GunTower)
+                {
+                    Resources.RemoveGold(50);
+                }
+                else if (newTower is SlowTower)
+                {
+                    Resources.RemoveGold(30);
+                }
                 towers.Add(newTower);
                 newTower = null;
                 selectingTower = false;

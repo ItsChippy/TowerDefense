@@ -13,6 +13,24 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin bossenemy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:bossenemy.png
+
+#begin bossound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:bossound.wav
+
 #begin commonenemy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -44,6 +62,18 @@
 /processorParam:TextureFormat=Color
 /build:exitbutton.png
 
+#begin goldcoin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:goldcoin.png
+
 #begin guntower.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -67,6 +97,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:heart.png
+
+#begin lasergun.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:lasergun.wav
+
+#begin maintheme.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:maintheme.wav
 
 #begin mapbackground.jpg
 /importer:TextureImporter
@@ -135,6 +177,18 @@
 /processorParam:TextureFormat=Color
 /build:projectile.png
 
+#begin resetbutton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:resetbutton.png
+
 #begin resourcefont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -153,6 +207,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:settingsbutton.png
+
+#begin slowgun.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:slowgun.wav
 
 #begin slowprojectile.png
 /importer:TextureImporter

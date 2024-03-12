@@ -10,9 +10,9 @@ namespace TowerDefense
     internal class StartMenuScreen
     {
 
-        Button playButton;
-        Button exitButton;
-        Button settingsButton;
+        MenuButton playButton;
+        MenuButton exitButton;
+        MenuButton settingsButton;
 
         GameTitle gameTitle;
         Texture2D menuBackground;
@@ -22,13 +22,13 @@ namespace TowerDefense
         {
             gameTitle = new GameTitle();
 
-            playButton = new Button("playbutton");
+            playButton = new MenuButton("playbutton");
             playButton.ChangePosition(new Vector2(0, 250));
 
-            exitButton = new Button("exitbutton");
+            exitButton = new MenuButton("exitbutton");
             exitButton.ChangePosition(new Vector2(0, 450));
 
-            settingsButton = new Button("settingsbutton");
+            settingsButton = new MenuButton("settingsbutton");
             settingsButton.ChangePosition(new Vector2(0, 350));
 
             menuBackground = Globals.Content.Load<Texture2D>("spacebackground");

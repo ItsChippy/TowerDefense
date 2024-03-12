@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefense
 {
-    internal class Button
+    internal class MenuButton
     {
         public bool IsSelected { get; set; }
         
@@ -19,7 +19,7 @@ namespace TowerDefense
         Rectangle buttonRect;
         
 
-        public Button(string buttonFileName)
+        public MenuButton(string buttonFileName)
         {
             buttonTexture = Globals.Content.Load<Texture2D>(buttonFileName);
             buttonColor = Color.LightGray;

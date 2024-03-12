@@ -90,8 +90,6 @@ namespace TowerDefense
 
         public void Draw()
         {
-            path.Draw(Globals.SpriteBatch);
-            path.DrawPoints(Globals.SpriteBatch);
             for (int i = 0; i < path.AntalPunkter - 1; i++)
             {
                 Vector2 direction = path.GetPos(i + 1) - path.GetPos(i);

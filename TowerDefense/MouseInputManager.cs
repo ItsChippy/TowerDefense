@@ -13,14 +13,21 @@ namespace TowerDefense
         public static bool HasClicked { get; private set; }
         public static Vector2 MousePosition { get; private set; }
 
+        static MouseState mouseState;
+
         public static void Update()
         {
-            var mouseState = Mouse.GetState();
+            mouseState = Mouse.GetState();
 
             HasClicked = mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Pressed;
             MousePosition = mouseState.Position.ToVector2();
 
             lastMouseState = mouseState;
+        }
+
+        public static bool HasRightClicked()
+        {
+            return mouseState.RightButton == ButtonState.Pressed;
         }
     }
 }

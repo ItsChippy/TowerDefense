@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace TowerDefense
 {
@@ -36,7 +37,8 @@ namespace TowerDefense
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            RenderTarget = new RenderTarget2D(GraphicsDevice, Window.ClientBounds.Width, Window.ClientBounds.Height);
+            Components.Add(new TowerControls(this));
             base.Initialize();
         }
         
@@ -48,7 +50,6 @@ namespace TowerDefense
             Globals.Content = Content;
             Globals.GameWindow = Window;
             Globals.GraphicsDevice = GraphicsDevice;
-            RenderTarget = new RenderTarget2D(GraphicsDevice, Window.ClientBounds.Width, Window.ClientBounds.Height);
             CurrentState = GameState.Playing;
 
             stateHandler = new Dictionary<GameState, IStateHandler>
@@ -65,7 +66,6 @@ namespace TowerDefense
             Globals.Update(gameTime);
             MouseInputManager.Update();
             ParticleSystem.Update();
-
             stateHandler[CurrentState].Update();
 
             base.Update(gameTime);
@@ -74,7 +74,6 @@ namespace TowerDefense
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
             stateHandler[CurrentState].Draw();
 
             base.Draw(gameTime);

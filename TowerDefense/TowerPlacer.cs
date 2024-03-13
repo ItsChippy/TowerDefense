@@ -71,7 +71,7 @@ namespace TowerDefense
                 {
                     Resources.RemoveGold(50);
                 }
-                else if (newTower is SlowTower)
+                if (newTower is SlowTower)
                 {
                     Resources.RemoveGold(30);
                 }

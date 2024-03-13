@@ -28,9 +28,30 @@ namespace TowerDefense
 
         public void UpdatePosition(Vector2 position)
         {
-            this.position = position;
-            hitbox.X = (int)position.X;
-            hitbox.Y = (int)position.Y;
+            if (CheckMaxBounds(position) && CheckMinBounds(position))
+            {
+                this.position = position;
+                hitbox.X = (int)position.X;
+                hitbox.Y = (int)position.Y;
+            }
+        }
+
+        private bool CheckMaxBounds(Vector2 position)
+        {
+            if (position.X + texture.Width < Globals.GameWindow.ClientBounds.Width && position.Y + texture.Height < Globals.GameWindow.ClientBounds.Height)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckMinBounds(Vector2 position)
+        {
+            if (position.X > 0 && position.Y > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static bool CanPlace(BaseTower tower)
@@ -38,12 +59,10 @@ namespace TowerDefense
             Color[] pixels = new Color[tower.texture.Width * tower.texture.Height];
             Color[] pixels2 = new Color[tower.texture.Width * tower.texture.Height];
             tower.texture.GetData(pixels2);
-            if (Globals.GameWindow.ClientBounds.Contains(tower.hitbox))
-            {
-                Globals.GraphicsDevice.SetRenderTarget(Game1.RenderTarget);
+            //if (Globals.GameWindow.ClientBounds.Contains(tower.hitbox))
+            //{
                 Game1.RenderTarget.GetData(0, tower.hitbox, pixels, 0, pixels.Length);
-                Globals.GraphicsDevice.SetRenderTarget(null);
-            }
+            //}
             for (int i = 0; i < pixels.Length; i++)
             {
                 if (pixels[i].A > 0.0f && pixels2[i].A > 0.0f)

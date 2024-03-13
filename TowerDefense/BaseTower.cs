@@ -21,6 +21,8 @@ namespace TowerDefense
         protected List<TowerProjectile> shotProjectiles;
         protected BaseEnemy target;
 
+        protected Color color;
+
         protected void GetHitBox()
         {
             hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
@@ -54,6 +56,19 @@ namespace TowerDefense
             return false;
         }
 
+        //changes color based on if the tower can be placed there or not
+        protected void IndicatePlacement(BaseTower tower)
+        {
+            if (!CanPlace(tower))
+            {
+                color = Color.Red;
+            }
+            else
+            {
+                color = Color.White;
+            }
+        }
+
         public static bool CanPlace(BaseTower tower)
         {
             Color[] pixels = new Color[tower.texture.Width * tower.texture.Height];
@@ -70,7 +85,6 @@ namespace TowerDefense
                     return false;
                 }
             }
-
             return true;
         }
 

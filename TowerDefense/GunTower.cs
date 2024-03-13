@@ -87,7 +87,8 @@ namespace TowerDefense
         {
             Vector2 origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
-            Globals.SpriteBatch.Draw(texture, position + origin, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0.9f);
+            IndicatePlacement(this);
+            Globals.SpriteBatch.Draw(texture, position + origin, null, color, rotation, origin, 1f, SpriteEffects.None, 0.9f);
 
             if (shotProjectiles.Count > 0 ) 
             {

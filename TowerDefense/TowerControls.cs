@@ -49,7 +49,7 @@ namespace TowerDefense
                 Size = new Vector2(100, 50),
                 BackgroundColor = Color.LightGray,
                 IsVisible = true,
-                Location = new Vector2(675, 520), //bottom right of the screen
+                Location = new Vector2(675, 490), //bottom right of the screen
             };
 
             gunTowerButton.Clicked += OnClickGunTowerButton;
@@ -63,7 +63,7 @@ namespace TowerDefense
                 Size = new Vector2(100, 50),
                 BackgroundColor = Color.LightGray,
                 IsVisible = true,
-                Location = new Vector2(555, 520),
+                Location = new Vector2(555, 490),
             };
 
             slowTowerButton.Clicked += OnClickSlowTowerButton;

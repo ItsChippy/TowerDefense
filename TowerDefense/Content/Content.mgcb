@@ -250,3 +250,9 @@
 /processorParam:TextureFormat=Color
 /build:spacebackground.jpg
 
+#begin winsound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:winsound.wav
+

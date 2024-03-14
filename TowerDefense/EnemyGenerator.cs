@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,12 +34,12 @@ namespace TowerDefense
             SetEnemyWave2();
         }
 
-        //Checks if all the enemies in the current round are dead
+        //Checks if all the enemies in the current round are dead or reached the end of the path
         public bool CheckIfRoundIsOver(BaseEnemy[]enemyWave)
         {
             for (int i = 0; i < enemyWave.Length; i++)
             {
-                if (!enemyWave[i].isDead)
+                if (!enemyWave[i].CheckForOutOfBounds())
                 {
                     return false;
                 }
@@ -85,7 +86,7 @@ namespace TowerDefense
                 if (elapsedTimeWave2 >= i * updateInterval)
                 {
                     BaseEnemy enemy = enemyWave2[i];
-                    if (!enemy.isDead)
+                    if (!enemy.isDead || !enemy.dealtDamage)
                     {
                         enemy.Update(enemyPath);
                     }
@@ -97,7 +98,7 @@ namespace TowerDefense
         {
             foreach (BaseEnemy enemy in enemyWave2)
             {
-                if (!enemy.isDead)
+                if (!enemy.isDead || !enemy.dealtDamage)
                 {
                     enemy.Draw();
                 }
@@ -122,7 +123,7 @@ namespace TowerDefense
                 if (elapsedTimeWave1 >= i * updateInterval)
                 {
                     BaseEnemy enemy = enemyWave1[i];
-                    if (!enemy.isDead)
+                    if (!enemy.isDead || !enemy.dealtDamage)
                     {
                         enemy.Update(enemyPath);
                     }
@@ -134,7 +135,7 @@ namespace TowerDefense
         {
             foreach (BaseEnemy enemy in enemyWave1)
             {
-                if (!enemy.isDead)
+                if (!enemy.isDead || !enemy.dealtDamage)
                 {
                     enemy.Draw();
                 }

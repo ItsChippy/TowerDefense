@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 
 namespace TowerDefense
@@ -42,7 +43,6 @@ namespace TowerDefense
             Components.Add(new TowerControls(this));
             base.Initialize();
         }
-        
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -72,7 +72,6 @@ namespace TowerDefense
             MouseInputManager.Update();
             ParticleSystem.Update();
             stateHandler[CurrentState].Update();
-
             base.Update(gameTime);
         }
 

@@ -35,7 +35,7 @@ namespace TowerDefense
 
                 if(isSlowShot)
                 {
-                    target.SlowMovementSpeed();
+                    target.isSlow = true;
                 }
                 return true;
             }

@@ -9,7 +9,6 @@ namespace TowerDefense
 {
     internal class BossEnemy : BaseEnemy
     {
-        bool dealtDamage;
         EnemyHealthBar ehb; //display for their current health out of their max health
         SoundEffect spawnSound;
         bool playedSound;

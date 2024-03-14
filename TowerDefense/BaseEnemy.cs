@@ -1,4 +1,5 @@
-﻿using Spline;
+﻿using SharpDX.DirectWrite;
+using Spline;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace TowerDefense
         protected int damage;
         protected float speed;
         protected float rotationAngle;
+        protected float slowTimer = 2f;
+        protected float slowInterval;
+
+        public bool isSlow;
+        public bool dealtDamage { get; protected set; }
         public bool isDead;
 
         public abstract void Update(SimplePath path);
@@ -28,9 +34,9 @@ namespace TowerDefense
             hitbox.Y = (int)position.Y;
         }
 
-        protected bool CheckForOutOfBounds()
+        public bool CheckForOutOfBounds()
         {
-            if(position.Y > 610 && !isDead) //game window height is default set to 600
+            if(position.Y > 610) //game window height is default set to 600
             {
                 return true;
             }
@@ -61,20 +67,21 @@ namespace TowerDefense
 
         public void SlowMovementSpeed()
         {
-            float slowTimer = 3;
             if (this is BossEnemy)
             {
                 return;
             }
-            if (slowTimer > 0)
+
+            if (isSlow)
             {
-                speed = 0.5f;
+                speed = 0.7f;
                 slowTimer -= Globals.DeltaTimeSeconds;
 
                 if (slowTimer <= 0)
                 {
-                    slowTimer = 3f;
-                    speed = 1f;
+                    slowTimer = slowInterval;
+                    speed = 1.3f;
+                    isSlow = false;
                 }
             }
         }

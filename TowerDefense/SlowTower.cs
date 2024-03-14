@@ -15,7 +15,7 @@ namespace TowerDefense
             shoot = Globals.Content.Load<SoundEffect>(@"slowgun");
             SoundEffect.MasterVolume = 0.05f;
             this.position = position;
-            attackSpeed = 1.2f;
+            attackSpeed = 3f;
             ShotCooldown = attackSpeed;
             range = 200;
             shotProjectiles = new List<TowerProjectile>();
@@ -36,7 +36,7 @@ namespace TowerDefense
                 }
             }
 
-            foreach(var shot in  shotProjectiles) 
+            foreach(var shot in shotProjectiles) 
             {
                 shot.Update();
             }
@@ -73,8 +73,8 @@ namespace TowerDefense
 
                 if (target != null)
                 {
-                    shotProjectiles.Add(new SlowProjectile(new Vector2(position.X + texture.Width / 2, position.Y + texture.Width / 2), target));
                     shoot.Play();
+                    shotProjectiles.Add(new SlowProjectile(new Vector2(position.X + texture.Width / 2, position.Y + texture.Width / 2), target));
                 }
             }
         }

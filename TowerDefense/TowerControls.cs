@@ -9,6 +9,7 @@ namespace TowerDefense
 {
     internal class TowerControls : ControlManager
     {
+
         public TowerControls(Game game) : base(game)
         {
         }
@@ -25,22 +26,7 @@ namespace TowerDefense
             };
 
             muteButton.Clicked += OnClickMuteButton;
-
             Controls.Add(muteButton);
-
-            var unMuteButton = new Button()
-            {
-                Text = "Unmute Music",
-                TextColor = Color.Black,
-                Size = new Vector2(100, 50),
-                BackgroundColor = Color.LightBlue,
-                Location = new Vector2(0, 495)
-            };
-
-            unMuteButton.Clicked += OnClickUnMuteButton;
-
-            Controls.Add(unMuteButton);
-
 
             var gunTowerButton = new Button()
             {
@@ -49,10 +35,11 @@ namespace TowerDefense
                 Size = new Vector2(100, 50),
                 BackgroundColor = Color.LightGray,
                 IsVisible = true,
-                Location = new Vector2(675, 490), //bottom right of the screen
+                Location = new Vector2(655, 520), //bottom right of the screen
             };
 
             gunTowerButton.Clicked += OnClickGunTowerButton;
+            gunTowerButton.MouseEnter += OnHoverGunTowerButton;
 
             Controls.Add(gunTowerButton);
 
@@ -63,31 +50,34 @@ namespace TowerDefense
                 Size = new Vector2(100, 50),
                 BackgroundColor = Color.LightGray,
                 IsVisible = true,
-                Location = new Vector2(555, 490),
+                Location = new Vector2(535, 520),
             };
 
             slowTowerButton.Clicked += OnClickSlowTowerButton;
-
+            slowTowerButton.MouseEnter += OnHoverSlowTowerButton;
             Controls.Add(slowTowerButton);
         }
 
         //OnClick events for various buttons in the game, using MonoGame.UI.Forms
-        private void OnClickUnMuteButton(object sender, EventArgs e)
-        {
-            var unMuteButton = sender as Button;
-            MediaPlayer.IsMuted = false;
-        }
 
         private void OnClickMuteButton(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            MediaPlayer.IsMuted = true;
+            if (MediaPlayer.IsMuted)
+            {
+                MediaPlayer.IsMuted = false;
+                button.Text = "Mute Music";
+            }
+            else if (!MediaPlayer.IsMuted)
+            {
+                MediaPlayer.IsMuted = true;
+                button.Text = "Unmute Music";
+            }
         }
 
         private void OnClickGunTowerButton(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            if (Resources.GetGold() >= 50)
+            if (Game1.CurrentState == GameState.Playing && Resources.GetGold() >= 50)
             {
                 TowerPlacer.SelectGunTower();
             }
@@ -95,11 +85,31 @@ namespace TowerDefense
 
         private void OnClickSlowTowerButton(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            if (Resources.GetGold() >= 30)
+            if (Game1.CurrentState == GameState.Playing && Resources.GetGold() >= 30)
             {
                 TowerPlacer.SelectSlowTower();
             }
+        }
+
+        //OnHover events for hover effects
+        private void OnHoverGunTowerButton(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            button.BackgroundColor = Color.White;
+            button.MouseLeave += Button_MouseLeave;
+        }
+
+        private void Button_MouseLeave(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            button.BackgroundColor = Color.LightGray;
+        }
+
+        private void OnHoverSlowTowerButton (object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            button.BackgroundColor = Color.White;
+            button.MouseLeave += Button_MouseLeave;
         }
     }
 }

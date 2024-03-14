@@ -28,13 +28,13 @@ namespace TowerDefense
         public static void SelectGunTower()
         {
             selectingTower = true;
-            newTower = new GunTower(MouseInputManager.MousePosition); 
+            newTower = new GunTower(new Vector2(MouseInputManager.MousePosition.X - 20, MouseInputManager.MousePosition.Y - 20)); //centers the tower onto the mouse position
         }
 
         public static void SelectSlowTower()
         {
             selectingTower = true;
-            newTower = new SlowTower(MouseInputManager.MousePosition); 
+            newTower = new SlowTower(new Vector2(MouseInputManager.MousePosition.X - 20, MouseInputManager.MousePosition.Y - 20)); //centers the tower onto the mouse position
         }
 
         public void UpdateTowerPlacer()

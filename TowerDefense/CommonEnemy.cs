@@ -12,7 +12,6 @@ namespace TowerDefense
 {
     internal class CommonEnemy : BaseEnemy
     {
-        bool dealtDamage;
         EnemyHealthBar ehb;
         StaticEmitter emitter;
         ParticleEmitter explosion;
@@ -21,7 +20,7 @@ namespace TowerDefense
         {
             texture = Globals.Content.Load<Texture2D>("commonenemy");
             health = 100;
-            speed = 1f;
+            speed = 1.3f;
             damage = 10;
             dealtDamage = false;
             this.position = position;
@@ -29,11 +28,12 @@ namespace TowerDefense
             origin = new Vector2(texture.Width / 2, texture.Height / 2);
             isDead = false;
             ehb = new EnemyHealthBar(health, new Vector2(position.X, position.Y - 10));
+            slowInterval = slowTimer;
         }
 
         public override void Update(SimplePath path)
         {
-            if (health <= 0) //if enemy is dead
+            if (health <= 0 && !isDead) //if enemy is dead
             {
                 CreateParticleExplosion();
                 ParticleSystem.AddParticleEmitter(explosion);
@@ -41,7 +41,7 @@ namespace TowerDefense
                 position = new Vector2(1000, 1000);
                 isDead = true;
             }
-            if (CheckForOutOfBounds() && !dealtDamage) //has reached the end of the path
+            if (CheckForOutOfBounds() && !dealtDamage && !isDead) //has reached the end of the path
             {
                 Resources.healthUpdate(damage);
                 position = new Vector2(1000, 1000);
@@ -57,6 +57,7 @@ namespace TowerDefense
             position += direction * speed;
             ehb.Update(health, new Vector2(position.X + texture.Width / 2, position.Y - 20));
             UpdateHitboxPosition();
+            SlowMovementSpeed();
         }
 
         public override void Draw()

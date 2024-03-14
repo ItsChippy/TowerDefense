@@ -19,7 +19,7 @@ namespace TowerDefense
         public CommonEnemy(Vector2 position)
         {
             texture = Globals.Content.Load<Texture2D>("commonenemy");
-            health = 100;
+            health = 120;
             speed = 1.3f;
             damage = 10;
             dealtDamage = false;

@@ -20,7 +20,7 @@ namespace TowerDefense
         {
             font = Globals.Content.Load<SpriteFont>(@"resourcefont");
             health = 100;
-            gold = 200;
+            gold = 180;
             heartTexture = Globals.Content.Load<Texture2D>(@"heart");
             goldTexture = Globals.Content.Load<Texture2D>(@"goldcoin");
             healthUpdate = TakeDamageDelegate;
